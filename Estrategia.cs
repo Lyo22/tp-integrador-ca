@@ -15,31 +15,30 @@ namespace tpfinal
 		{
 			string resultado = "";
 
-            if (arbol == null) return resultado;
+            		if (arbol == null) return resultado;
 
 			if (arbol.esHoja()) 
 			{
-                resultado += arbol.getDatoRaiz().ToString() + "\n";
+	                	resultado += arbol.getDatoRaiz().ToString() + "\n";
 			}
 
 			else
 			{
-
-			
-                if (arbol.getHijoIzquierdo != null)
-                {
-                    resultado += Consulta1(arbol.getHijoIzquierdo());
-                }
-
-                if (arbol.getHijoDerecho != null)
-                {
-                    resultado += Consulta1(arbol.getHijoDerecho());
-                }
-
-            }
-
-            return resultado;
-		}
+				
+	                if (arbol.getHijoIzquierdo != null)
+	                {
+	                    resultado += Consulta1(arbol.getHijoIzquierdo());
+	                }
+	
+	                if (arbol.getHijoDerecho != null)
+	                {
+	                    resultado += Consulta1(arbol.getHijoDerecho());
+	                }
+	
+	            	}
+	
+	            	return resultado;
+		     }
 
 		//Consulta2(ArbolBinario<DecisionData> arbol) : Retorna un texto que contiene todos
 		//los caminos hasta cada predicción.
@@ -48,7 +47,7 @@ namespace tpfinal
 		{
 			string resultado = "";
 
-            resultado += prefijo + (hijoDerecho ? "└──" : "├── ") + arbol.getDatoRaiz().ToString() + Environment.NewLine;
+            		resultado += prefijo + (hijoDerecho ? "└──" : "├── ") + arbol.getDatoRaiz().ToString() + Environment.NewLine;
 
 			if (arbol.esHoja())
 			{
@@ -59,16 +58,15 @@ namespace tpfinal
 			{
 				string nuevoPrefijo = prefijo + (hijoDerecho ? "  " : "│ ");
 
-				if (arbol.getHijoIzquierdo() != null) { 
+				if (arbol.getHijoIzquierdo() != null) 
+				{ 
 				    resultado += Consulta2(arbol.getHijoIzquierdo(), nuevoPrefijo, false ); 
-				
 				}
 
 				if (arbol.getHijoDerecho() != null)
 				{
-                    resultado += Consulta2(arbol.getHijoDerecho(), nuevoPrefijo, true);
-
-                }
+                   		 resultado += Consulta2(arbol.getHijoDerecho(), nuevoPrefijo, true);
+				}
 
             }
 
@@ -93,7 +91,7 @@ namespace tpfinal
             Cola<(ArbolBinario<DecisionData>, int)> cola = new Cola<(ArbolBinario<DecisionData>, int)>();
 
 
-            cola.encolar((arbol, 0));
+            cola.encolar((arbol, 1));
 
             while (!cola.esVacia())
             {
@@ -125,13 +123,11 @@ namespace tpfinal
             foreach ( var datos in niveles)
             {
                 result += " Nivel" + datos.Key + ": " + "\n";
-
                 List<String> nodos = datos.Value;
 
                 foreach (var d in nodos)
                 {
                     result +=  d + "\n";
-
                 }
 
                 result += "\n";
@@ -149,14 +145,14 @@ namespace tpfinal
 		{
 
             if (clasificador.crearHoja()) 
-			{
+		{
                 // predicción
                 return new ArbolBinario<DecisionData>(new DecisionData(clasificador.obtenerDatoHoja()));
-
-            }
-			else
-			{
-				// pregunta
+            	}
+		
+		else
+		{
+		// pregunta
 
                 ArbolBinario<DecisionData> nodoDecision = new ArbolBinario<DecisionData>(new DecisionData(clasificador.obtenerPregunta()));
 
@@ -169,7 +165,6 @@ namespace tpfinal
                 {
                     nodoDecision.agregarHijoDerecho(CrearArbol(clasificador.obtenerClasificadorDerecho()));
                 }
-
 
                 return nodoDecision;
 
